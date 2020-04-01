@@ -1,0 +1,68 @@
+<%- include('./partials/header') %>
+
+<section id="admin">
+    <div class="container py-5 my-5">
+        <div class="row">
+            <div class="col">
+                <h2>Painel de Controle</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container py-5 my-5">
+        <div class="row">
+            <div class="col">
+                <h3>Newsletter</h3>
+                <div class="container">
+
+                    <table class="w3-table w3-striped w3-bordered">
+                        <tr>
+                            <th>email</th>
+                            <th>data</th>
+                            <th>ações</th>
+                        </tr>
+                        <% for(let i = 0; i < listaNewsletter.length; i++) { %>
+                        <tr>
+                            <td><%= listaNewsletter[i].email %></td>
+                            <td><%= listaNewsletter[i].date %></td>
+                            <td>
+                                <button type="button" class="btn btn-warning">Editar</button>
+                                <button type="button" class="btn btn-danger" >Excluir</button>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="container py-5 my-5">
+            <div class="row">
+                <div class="col">
+                    <h3>Contato</h3>
+
+                    <table class="w3-table w3-striped w3-bordered">
+                        <tr>
+                            <th>nome</th>
+                            <th>email</th>
+                            <th>mensagem</th>
+                            <th>ações</th>
+                        </tr>
+                        <% for(let i = 0; i < listaContato.length; i++) { %>
+                        <tr>
+                            <td><%= listaContato[i].nome %></td>
+                            <td><%= listaContato[i].email %></td>
+                            <td><%= listaContato[i].mensagem %></td>
+                            <td>
+                                <button type="button" class="btn btn-warning">Editar</button>
+                                <button type="button" class="btn btn-danger" >Excluir</button>
+                            </td>
+                        </tr>
+                        <% } %>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+</section>
+
+<%- include('./partials/footer') %>

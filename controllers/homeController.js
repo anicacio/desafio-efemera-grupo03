@@ -39,18 +39,32 @@ const homeController = {
   },
   newsletter: (req, res) => {
     let {email} = req.query;
+    let dataTime = new Date();
+
 
     const fileNewsletter = path.join('db', 'newsletter.json');
     let listaNewsletter
+
     if (fs.existsSync(fileNewsletter)) {
       listaNewsletter = fs.readFileSync(fileNewsletter, {encoding: 'utf-8'});
       listaNewsletter = JSON.parse(listaNewsletter);
-      listaNewsletter.inscritos.push(email);
+
+      listaNewsletter.push({
+        email: email,
+        date: dataTime
+      });
+      
     } else {
-      listaNewsletter = {
-        inscritos: [email]
-      };
+      listaNewsletter = [{
+        email: email,
+        date: dataTime
+      }]
+
+      // listaNewsletter = {
+      //   inscritos: [email]
+      // };
     };
+
     listaNewsletter = JSON.stringify(listaNewsletter);
     fs.writeFileSync(fileNewsletter, listaNewsletter);
 
