@@ -1,0 +1,30 @@
+<%- include('./partials/header') %>
+
+<section id="login">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-md-6">
+          <form action="/login" method="POST">
+            <h2>Tela de Login</h2>
+
+                <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha" class="form-control" />
+            </div>
+            <button class="btn btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%- include('./partials/footer') %>
