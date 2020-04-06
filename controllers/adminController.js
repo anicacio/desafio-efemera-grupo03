@@ -23,11 +23,12 @@ const adminController = {
             });
             listaContato = JSON.parse(listaContato);
         };
-
+        let userSession = req.session.usuario;
         res.render('admin', {
             listaNewsletter,
             listaContato,
-            title: 'Painel de Controle '
+            userSession,
+            title: 'Painel de Controle'
         });
     }
 

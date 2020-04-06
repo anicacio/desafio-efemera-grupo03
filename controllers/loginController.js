@@ -4,44 +4,44 @@ const bcrypt = require('bcrypt');
 
 
 const loginController = {
-    salvar: (req, res) => {
+    login: (req, res) => {
         let {
-            nome,
             email,
             senha
         } = req.body;
+
         const fileUsuarios = path.join('db', `usuarios.json`);
         let listaUsuarios;
         let senhaCrip = bcrypt.hashSync(senha, 10);
-        console.log(senhaCrip);
-        if (fs.existsSync(fileUsuarios)) {
-            listaUsuarios = fs.readFileSync(fileUsuarios, {
-                encoding: 'utf-8'
-            });
-            listaUsuarios = JSON.parse(listaUsuarios);
-            listaUsuarios.push({
-                nome,
-                email,
-                senhaCrip
-            });
-        } else {
-            listaUsuarios = [{
-                nome,
-                email,
-                senhaCrip
-            }];
-        };
 
-        listaUsuarios = JSON.stringify(listaUsuarios);
-        fs.writeFileSync(fileUsuarios, listaUsuarios);
 
+        listaUsuarios = fs.readFileSync(fileUsuarios, {encoding: 'utf-8'});
+        listaUsuarios = JSON.parse(listaUsuarios);
+        listaUsuarios.forEach(usuario => {
+            console.log('Opa, deu certo, ou quase' + " " + usuario.email + " " + email + " " + senhaCrip + " " + usuario.senhaCrip);
+            
+            if(usuario.email == email && bcrypt.compareSync(senha, usuario.senhaCrip)){
+                console.log('Opa, deu certo, ou quase');
+                req.session.usuario = usuario;
+                res.redirect('/admin');
+            }
+            // if(usuario.email != email) {
+            //     return res.send("Usuário inválido" + usuario.email + email)
+            // }
+            // if(!bcrypt.compareSync(senhaCrip, usuario.senhaCrip)) {
+            //     return res.send("Senha inválido") 
+            // }
+        })
         res.render('login', {
-            title: 'Tela de login'
+            title: 'Tela de login', 
+            error: true
         });
     },
-    cadastro: (req, res) => {
+
+    visualizar: (req, res) => {
         res.render('login', {
-            title: 'Tela de login'
+            title: 'Tela de login',
+            error: false
         });
     }
 

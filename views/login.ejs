@@ -6,6 +6,9 @@
         <div class="col-md-6">
           <form action="/login" method="POST">
             <h2>Tela de Login</h2>
+            <% if(error) {%>
+              <p>Usuário ou senha inválido</p>
+            <% } %>
 
                 <div class="form-group">
               <label for="email">Email</label>

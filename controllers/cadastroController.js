@@ -13,7 +13,6 @@ const cadastroController = {
         const fileUsuarios = path.join('db', `usuarios.json`);
         let listaUsuarios;
         let senhaCrip = bcrypt.hashSync(senha, 10);
-        console.log(senhaCrip);
         if (fs.existsSync(fileUsuarios)) {
             listaUsuarios = fs.readFileSync(fileUsuarios, {
                 encoding: 'utf-8'
